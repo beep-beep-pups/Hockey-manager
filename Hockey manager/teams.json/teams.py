@@ -106,6 +106,84 @@ teams_data = [
         ]
     },
     {
+        "name": "Dragons",
+        "players": [
+            {"name": "Nick Mercly", "position": "Forward", "skill": 79},
+            {"name": "Kevin Labank", "position": "Forward", "skill": 77},
+            {"name": "Spencer Fu", "position": "Forward", "skill": 72},
+            {"name": "Pavel Akolzin", "position": "Forward", "skill": 74},
+            {"name": "Jake Bischoff", "position": "Defender", "skill": 74},
+            {"name": "Riley Wil", "position": "Defender", "skill": 75},
+            {"name": "Vladislav Leontyev", "position": "Defender", "skill": 76},
+            {"name": "Patrick Rybar", "position": "Goalkeeper", "skill": 77}
+        ]
+    },
+    {
+        "name": "lada",
+        "players": [
+            {"name": "Vladislav Chervonenko", "position": "Forward", "skill": 76},
+            {"name": "Riley Savchuk", "position": "Forward", "skill": 76},
+            {"name": "Andrey Chivilyov", "position": "Forward", "skill": 77},
+            {"name": "Andrey Altybarmakyan", "position": "Forward", "skill": 75},
+            {"name": "Willams Colbi", "position": "Defender", "skill": 77},
+            {"name": "Daniil Bokun", "position": "Defender", "skill": 76},
+            {"name": "Artem Zemchonok", "position": "Defender", "skill": 78},
+            {"name": "Alex Trushkov", "position": "Goalkeeper", "skill": 77}
+        ]
+    },
+    {
+        "name": "Sochi",
+        "players": [
+            {"name": "Willam Bitten", "position": "Forward", "skill": 77},
+            {"name": "Timur Hafizov", "position": "Forward", "skill": 75},
+            {"name": "Pavel Dedunov", "position": "Forward", "skill": 78},
+            {"name": "Matvey Babenko", "position": "Forward", "skill": 77},
+            {"name": "Danil Mokrushev", "position": "Defender", "skill": 75},
+            {"name": "Cameron Li", "position": "Defender", "skill": 78},
+            {"name": "Artem Volkov", "position": "Defender", "skill": 76},
+            {"name": "Maxim Tretyak", "position": "Goalkeeper", "skill": 78}
+        ]
+    },
+    {
+        "name": "Amur",
+        "players": [
+            {"name": "Evgeniy Svechnikov", "position": "Forward", "skill": 75},
+            {"name": "Danil Yurtaikin", "position": "Forward", "skill": 78},
+            {"name": "Ivan Vorobyov", "position": "Forward", "skill": 75},
+            {"name": "Alex Broadherst", "position": "Forward", "skill": 77},
+            {"name": "Yaroslav Dyblenko", "position": "Defender", "skill": 75},
+            {"name": "Victor Antipin", "position": "Defender", "skill": 76},
+            {"name": "Roman Abrosimov", "position": "Defender", "skill": 77},
+            {"name": "Maxim Dorozhko", "position": "Goalkeeper", "skill": 78}
+        ]
+    },
+    {
+        "name": "Barys",
+        "players": [
+            {"name": "Emil Galimov", "position": "Forward", "skill": 75},
+            {"name": "Maxim Mukhametov", "position": "Forward", "skill": 75},
+            {"name": "Max Willman", "position": "Forward", "skill": 76},
+            {"name": "Maison Morelly", "position": "Forward", "skill": 77},
+            {"name": "Adil Beketaev", "position": "Defender", "skill": 76},
+            {"name": "Dmitriy Breus", "position": "Defender", "skill": 78},
+            {"name": "Jake Massi", "position": "Defender", "skill": 77},
+            {"name": "Nick Boyarkin", "position": "Goalkeeper", "skill": 77}
+        ]
+    },
+    {
+        "name": "Admiral",
+        "players": [
+            {"name": "Stepan Starkov", "position": "Forward", "skill": 78},
+            {"name": "Pavel Shen", "position": "Forward", "skill": 78},
+            {"name": "Nick Soshnikov", "position": "Forward", "skill": 79},
+            {"name": "Vladislav Kara", "position": "Forward", "skill": 81},
+            {"name": "Dmitriy Deryabin", "position": "Defender", "skill": 79},
+            {"name": "Alex Shepelev", "position": "Defender", "skill": 80},
+            {"name": "Semen Ibragimov", "position": "Defender", "skill": 78},
+            {"name": "Arseniy Ziba", "position": "Goalkeeper", "skill": 78}
+        ]
+    },
+    {
         "name": "Sibir",
         "players": [
             {"name": "Arkhip Nekolenko", "position": "Forward", "skill": 84},
