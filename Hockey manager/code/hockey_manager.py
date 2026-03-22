@@ -12,6 +12,7 @@ class player:
         self.points = 0
         self.saves = 0
         self.goals_against = 0
+        self.plus_minus = 0
     def __repr__(self):
         return f"{self.name} ({self.position}) – скилл: {self.skill}, очки: {self.points} (г: {self.goals}, п: {self.assists})"
     
@@ -50,9 +51,15 @@ class team:
         self.points = 0
         self.goals_scored = 0
         self.goals_conceded = 0
+        self.playoff_wins = 0
+        self.tactic = "neutral"
 
     def add_player(self, player):
         self.players.append(player)
+
+    def remove_player(self, player):
+        if player in self.players:
+            self.players.remove(player)
 
     def team_strength(self):
         if not self.players:
@@ -67,6 +74,7 @@ class team:
     def to_dict(self):
         return {
             "name": self.name,
+            "budget": self.budget,
             "players": [p.to_dict() for p in self.players],
             "wins": self.wins,
             "wins_ot": self.wins_ot,
@@ -79,7 +87,7 @@ class team:
     
     @staticmethod
     def from_dict(data):
-        team = team(data["name"])
+        team = team(data["name"], data.get("budget" , 1000))
         for p_data in data["players"]:
             team.add_player(player.from_dict(p_data))
         team.wins = data.get("wins", 0)
@@ -95,12 +103,11 @@ def load_teams_from_json(filename = "teams.json"):
     with open(filename, "r", encoding = "utf-8") as f:
         data = json.load(f)
     teams = []
-    for team_data in data:
-        teams.append(team.from_dict(team_data))
-
+    for t_data in data:
+        teams.append(team.from_dict(t_data))
     return teams
 
 def save_teams_to_json(teams, filename = "teams.json"):
-    data = [team.to_dict() for team in teams]
+    data = [t.to_dict() for t in teams]
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii = False, indent = 4)
