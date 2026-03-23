@@ -121,7 +121,7 @@ class league:
                 home = team1
             else:
                 home = team2
-            result = simulating_match(team1, team2, home_team = home)
+            result = simulating_match(team1, team2, home_team = home, is_playoff = True)
             games_log.append(result["report"])
             if result["winner"] == team1:
                 team1.playoff_wins += 1
