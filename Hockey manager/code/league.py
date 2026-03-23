@@ -5,9 +5,8 @@ class league:
     def __init__(self, teams):
         self.teams = teams
         self.shedule_by_rounds = []
-        self.current_match_index = 0
-        self.regular_season_ended = False
-        self.conference = self.split_into_conferences()
+        self.current_round = 0
+        self.conferences = self.split_into_conferences()
 
     def split_into_conferences(self):
         mid = len(self.teams) // 2
@@ -20,11 +19,13 @@ class league:
         first_circle = self._round_robin(self.teams)
         second_circle = self._reverse_round_robin(first_circle)
 
-        for _ in range(rounds //2):
+        for _ in range(rounds // 2):
             self.shedule_by_rounds.extend(first_circle)
             self.shedule_by_rounds.extend(second_circle)
+        if rounds % 2 == 1:
+            self.shedule_by_rounds.extend(first_circle)
 
-    def _round_robin(self,teams):
+    def _round_robin(self, teams):
         n = len(teams)
         if n % 2 != 0:
             teams = teams + [None]
@@ -44,11 +45,11 @@ class league:
                 home = rotating[j]
                 away = rotating[n - 1 - j]
                 if home is not None and away is not None:
-                    round_matches.append((home,away)):
+                    round_matches.append((home,away))
             shedule.append(round_matches)
-
-            rotating = [rotating[0]] + [rotating[-1]] + [rotating[1:-1]]
+            rotating = [rotating[0]] + [rotating[-1]] + rotating[1:-1]
         return shedule
+            
     def _reverse_round_robin(self,first_circle):
         reverse = []
         for round_matches in first_circle:
@@ -63,6 +64,7 @@ class league:
             if home == user_team or away == user_team:
                 return (home, away)
         return None
+    
     def simulate_round(self, user_team):
         if self.current_round >= len(self.shedule_by_rounds):
             return "Season is over", True
@@ -114,7 +116,7 @@ class league:
         games_log = []
         game_num = 1
         
-        while team1.playoff_wins < wins_needed and team2.playoff_wins <wins_needed:
+        while team1.playoff_wins < wins_needed and team2.playoff_wins < wins_needed:
             if (game_num == 1) or (game_num == 2) or (game_num == 5) or (game_num == 7):
                 home = team1
             else:
@@ -129,11 +131,23 @@ class league:
         winner = team1 if team1.playoff_wins == wins_needed else team2
         return winner, games_log
     
+    def show_playoff_bracket(self, playoff_teams):
+        print("\n=== Playoff ===")
+        for conf in ["west", "east"]:
+            print(f"\nСonference {conf.upper()}:")
+            teams = playoff_teams[conf]
+            print(f"1. {teams[0].name} - {teams[7].name}")
+            print(f"1. {teams[1].name} - {teams[6].name}")
+            print(f"1. {teams[2].name} - {teams[5].name}")
+            print(f"1. {teams[3].name} - {teams[4].name}")
+
     def run_playoffs(self):
         playoff_teams = self.determine_playoff_teams()
         if len(playoff_teams["west"]) < 8 or len(playoff_teams["east"]) < 8:
             print("Teams not enough")
             return None
+        
+        self.show_playoff_bracket(playoff_teams)
         
         quarter_qualifiers = {"west": [], "east": []}
         for conf in ["west","east"]:
@@ -149,8 +163,7 @@ class league:
                 print(f"Series winner: {winner.name}")
                 for g in games:
                     print(g)
-                original_seed = seed
-                winners.append((original_seed,winner))
+                winners.append((seed, winner))
             quarter_qualifiers[conf] = winners
 
         west1 = next(t for seed, t in quarter_qualifiers["west"] if seed == 1)
@@ -177,7 +190,7 @@ class league:
         for group_name, pairs in [("A", group_a_pairs), ("B", group_b_pairs)]:
             print(f"\nGroup {group_name}")
             for idx, (t1,t2) in enumerate(pairs, 1):
-                print(f"\nRound of 8 (Group {group_name}, match {idx}): {t1.name} vs {t2.name}")
+                print(f"\nRound of 8 (group {group_name}, match {idx}): {t1.name} vs {t2.name}")
                 winner, games = self.simulate_playoff_series(t1,t2)
                 print(f"Series winner: {winner.name}")
                 for g in games:
@@ -205,4 +218,3 @@ class league:
             return champion
         else:
             return None
-        
