@@ -21,12 +21,14 @@ class player:
             "name": self.name,
             "position": self.position,
             "skill": self.skill,
+            "price": self.price,
             "games_played": self.games_played,
             "goals": self.goals,
             "assists": self.assists,
             "points": self.points,
             "saves": self.saves,
-            "goals_against": self.goals_against
+            "goals_against": self.goals_against,
+            "plus_minus": self.plus_minus
         }
         
     @staticmethod
@@ -41,9 +43,10 @@ class player:
         return p
     
 class team:
-    def __init__(self,name):
+    def __init__(self,name,budget):
         self.name = name
         self.players = []
+        self.budget = budget
         self.wins = 0
         self.wins_ot = 0
         self.loses = 0
@@ -64,7 +67,7 @@ class team:
     def team_strength(self):
         if not self.players:
             return 0
-        return sum(p.skill for p in self.players) / len(self.players)\
+        return sum(p.skill for p in self.players) / len(self.players)
     
     def show_roster(self):
             print(f"\nTeam roster {self.name}:")
@@ -87,7 +90,7 @@ class team:
     
     @staticmethod
     def from_dict(data):
-        team = team(data["name"], data.get("budget" , 1000))
+        team = team(data["name"], data.get("budget"))
         for p_data in data["players"]:
             team.add_player(player.from_dict(p_data))
         team.wins = data.get("wins", 0)
