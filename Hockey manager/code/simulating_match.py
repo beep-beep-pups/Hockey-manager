@@ -41,9 +41,19 @@ def simulating_match(team1, team2, home_team=None, home_advantage=1.1, is_playof
     attack1 = attack1_final * factor1
     attack2 = attack2_final * factor2
 
-    # Вратари
-    goalie1 = next((p for p in team1.players if p.position == "Goalkeeper"), None)
-    goalie2 = next((p for p in team2.players if p.position == "Goalkeeper"), None)
+    def select_goalie(team):
+        goalies = [p for p in team.players if p.position == "Goalkeeper"]
+        if len(goalies) == 1:
+            return goalies[0]
+        goalies_sorted = sorted(goalies, key = lambda g: g.skill, reverse=True)
+        best = goalies_sorted[0]
+        if random.random() < 0.8:
+            return best
+        else:
+            return random.choice(goalies_sorted[1:])
+        
+    goalie1 = select_goalie(team1)
+    goalie2 = select_goalie(team2)
 
     total_goals1 = 0
     total_goals2 = 0
